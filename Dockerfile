@@ -49,3 +49,5 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install mecab-python3
 # gensim
 RUN pip install gensim
+# skflow
+RUN pip install git+git://github.com/google/skflow.git
