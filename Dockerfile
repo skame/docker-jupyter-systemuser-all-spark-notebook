@@ -47,4 +47,5 @@ RUN apt-get install -y --no-install-recommends \
 	mecab libmecab-dev mecab-ipadic-utf8 && \
 	apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN pip install mecab-python3
-
+# gensim
+RUN pip install gensim
