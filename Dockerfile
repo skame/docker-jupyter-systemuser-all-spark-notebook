@@ -21,10 +21,7 @@ RUN apt-get update && apt-get install -y \
         python-numpy \
         python-pip \
         python-scipy \
-        supervisor \
-        && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+        supervisor
 
 RUN curl -k -O https://bootstrap.pypa.io/get-pip.py && \
     python get-pip.py && \
@@ -45,5 +42,9 @@ ENV TENSORFLOW_VERSION 0.6.0
 RUN pip --no-cache-dir install \
         https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp34-none-linux_x86_64.whl
 
-
+# Mecab
+RUN apt-get install -y --no-install-recommends \
+	mecab libmecab-dev mecab-ipadic-utf8 && \
+	apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN pip install mecab-python3
 
