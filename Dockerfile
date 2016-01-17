@@ -54,4 +54,5 @@ RUN pip install git+git://github.com/google/skflow.git
 
 # Octave kernel
 RUN pip install octave_kernel
+RUN python -m octave_kernel.install
 
