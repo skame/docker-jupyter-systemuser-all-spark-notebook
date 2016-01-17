@@ -44,15 +44,19 @@ RUN pip --no-cache-dir install \
 
 # Mecab
 RUN apt-get install -y --no-install-recommends \
-	mecab libmecab-dev mecab-ipadic-utf8 && \
-	apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
+	mecab libmecab-dev mecab-ipadic-utf8
 RUN pip install mecab-python3
 # gensim
 RUN pip install gensim
 # skflow
 RUN pip install git+git://github.com/google/skflow.git
-
+# Octave
+RUN apt-get install -u --no-install-recommends \
+	octave
 # Octave kernel
 RUN pip install octave_kernel
 RUN python -m octave_kernel.install
+
+# clean
+RUN apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
 
