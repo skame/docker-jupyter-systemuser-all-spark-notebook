@@ -51,7 +51,7 @@ RUN pip install gensim
 # skflow
 RUN pip install git+git://github.com/google/skflow.git
 # Octave
-RUN apt-get install -u --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
 	octave
 # Octave kernel
 RUN pip install octave_kernel
