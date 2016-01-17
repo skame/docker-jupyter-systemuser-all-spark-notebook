@@ -51,3 +51,7 @@ RUN pip install mecab-python3
 RUN pip install gensim
 # skflow
 RUN pip install git+git://github.com/google/skflow.git
+
+# Octave kernel
+RUN pip install octave_kernel
+
