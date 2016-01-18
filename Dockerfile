@@ -59,7 +59,7 @@ RUN python -m octave_kernel.install
 
 #
 RUN apt-get install -y --no-install-recommends \
-	libxml
+	libxml2
 RUN pip install pyquery
 # clean
 RUN apt-get -y autoremove && apt-get clean # && rm -rf /var/lib/apt/lists/*
