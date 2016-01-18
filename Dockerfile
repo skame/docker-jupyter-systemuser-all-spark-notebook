@@ -23,9 +23,9 @@ RUN apt-get update && apt-get install -y \
         python-scipy \
         supervisor
 
-RUN curl -k -O https://bootstrap.pypa.io/get-pip.py && \
-    python get-pip.py && \
-    rm get-pip.py
+#RUN curl -k -O https://bootstrap.pypa.io/get-pip.py && \
+#    python get-pip.py && \
+#    rm get-pip.py
 
 RUN pip --no-cache-dir install \
         ipykernel \
@@ -36,8 +36,8 @@ RUN pip --no-cache-dir install \
 
 # Install TensorFlow CPU version.
 ENV TENSORFLOW_VERSION 0.6.0
-#RUN pip --no-cache-dir install \
-#       https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl
+RUN pip2 install \
+       https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl
 
 RUN pip --no-cache-dir install \
         https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp34-none-linux_x86_64.whl
@@ -47,7 +47,7 @@ RUN apt-get install -y --no-install-recommends \
 	mecab libmecab-dev mecab-ipadic-utf8
 RUN pip install mecab-python3
 # gensim
-RUN pip install gensim
+RUN conda install gensim
 # skflow
 RUN pip install git+git://github.com/google/skflow.git
 # Octave
@@ -56,10 +56,9 @@ RUN apt-get install -y --no-install-recommends \
 # Octave kernel
 RUN pip install octave_kernel
 RUN python -m octave_kernel.install
-
-#
+# pyquery
 RUN apt-get install -y --no-install-recommends \
-	libxml2
+	libxml2 libxml2-dev libxslt1.1 libxslt1-dev python3-lxml gcc
 RUN pip install pyquery
 # clean
 RUN apt-get -y autoremove && apt-get clean # && rm -rf /var/lib/apt/lists/*
