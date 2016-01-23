@@ -40,6 +40,9 @@ RUN conda install libxml2 libxslt lxml gcc
 RUN conda skeleton pypi pyquery && conda build pyquery
 # SQL
 RUN conda install pymysql
+RUN conda install psycopg2
 RUN pip install ipython-sql
 # clean
 RUN apt-get -y autoremove && apt-get clean # && rm -rf /var/lib/apt/lists/*
+
+
