@@ -3,7 +3,8 @@ FROM jupyter/all-spark-notebook
 USER root
 
 # fetch juptyerhub-singleuser entrypoint
-ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/jupyterhub/singleuser.py /usr/local/bin/jupyterhub-singleuser
+ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/scripts/jupyterhub-singleuser /usr/local/bin/jupyterhub-singleuser
+#ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/jupyterhub/singleuser.py /usr/local/bin/jupyterhub-singleuser
 RUN chmod 755 /usr/local/bin/jupyterhub-singleuser
 
 RUN sed -ri 's!/usr/local!/opt/conda/bin:/usr/local!' /etc/sudoers
