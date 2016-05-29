@@ -45,6 +45,8 @@ RUN pip install pyquery
 RUN conda install pymysql
 RUN conda install psycopg2
 RUN pip install ipython-sql
+# pyhive
+RUN pip install pyhive
 # clean
 RUN apt-get -y autoremove && apt-get clean # && rm -rf /var/lib/apt/lists/*
 # smoke test entrypoint
