@@ -47,6 +47,9 @@ RUN conda install psycopg2
 RUN pip install ipython-sql
 # pyhive
 RUN pip install pyhive
+# plotly
+RUN pip install plotly
+RUN pip install cufflinks
 # clean
 RUN apt-get -y autoremove && apt-get clean # && rm -rf /var/lib/apt/lists/*
 # smoke test entrypoint
