@@ -20,7 +20,7 @@ RUN conda install ipykernel jupyter matplotlib conda-build && \
 RUN pip install --upgrade pip
 
 # Install TensorFlow CPU version.
-ENV TENSORFLOW_VERSION 0.8.0
+ENV TENSORFLOW_VERSION 0.10.0
 RUN curl https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp34-cp34m-linux_x86_64.whl -o tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
 RUN pip --no-cache-dir install --upgrade \
 	tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
