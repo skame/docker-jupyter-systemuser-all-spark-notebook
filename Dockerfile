@@ -18,6 +18,8 @@ RUN conda install libpng freetype numpy pip scipy
 RUN conda install ipykernel jupyter matplotlib conda-build && \
 	python -m ipykernel.kernelspec
 RUN pip install --upgrade pip
+# ref. http://datalove.hatenadiary.jp/entry/python/anaconda/install-tensorflow-into-anaconda-environment
+RUN pip install --upgrade -I setuptools
 
 # Install TensorFlow CPU version.
 ENV TENSORFLOW_VERSION 0.10.0
