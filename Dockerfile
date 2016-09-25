@@ -17,13 +17,11 @@ RUN conda update --all
 RUN conda install libpng freetype numpy pip scipy
 RUN conda install ipykernel jupyter matplotlib conda-build && \
 	python -m ipykernel.kernelspec
-RUN pip install --upgrade pip
-# ref. http://datalove.hatenadiary.jp/entry/python/anaconda/install-tensorflow-into-anaconda-environment
-RUN pip install --upgrade -I setuptools
 
 # Install TensorFlow CPU version.
+RUN pip install --upgrade -I setuptools
 ENV TENSORFLOW_VERSION 0.10.0
-RUN curl https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp34-cp34m-linux_x86_64.whl -o tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
+RUN curl -L -O https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
 RUN pip --no-cache-dir install --upgrade \
 	tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
 # Mecab
@@ -46,7 +44,7 @@ RUN pip install pyquery
 # SQL
 RUN conda install pymysql
 RUN conda install psycopg2
-RUN pip install ipython-sql
+RUN conda install ipython-sql
 # pyhive
 RUN pip install pyhive
 # plotly
