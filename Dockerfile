@@ -35,7 +35,7 @@ RUN conda install gensim
 # skflow
 RUN pip install git+git://github.com/google/skflow.git
 # Octave
-RUN apt-get install -y --no-install-recommends octave
+RUN apt-get install -y --no-install-recommends default-jre-headless octave
 # Octave kernel
 RUN pip install octave_kernel
 RUN python -m octave_kernel.install
@@ -60,8 +60,12 @@ RUN cd /tmp && \
         rm spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz
 RUN cd /usr/local && rm -f spark && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7 spark
 ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.1-src.zip
+# for NT lab
+RUN conda install zc.lockfile linecache2 && pip install argparse
 # clean
 RUN apt-get -y autoremove && apt-get clean # && rm -rf /var/lib/apt/lists/*
+# fix
+RUN chmod a+r /opt/conda/lib/python3.5/site-packages/prettytable-0.7.2-py3.5.egg-info/PKG-INFO
 # smoke test entrypoint
 RUN USER_ID=65000 USER=systemusertest sh /srv/singleuser/systemuser.sh -h && userdel systemusertest
 
