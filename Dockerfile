@@ -24,7 +24,8 @@ ENV TENSORFLOW_VERSION 0.10.0
 RUN curl -L -O https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
 RUN pip --no-cache-dir install --upgrade \
 	tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
-# Install Chainer
+# Install Chainer (without GPU)
+RUN pip install --install-option="--cupy-no-cuda" chainer
 RUN pip install chainer
 # Mecab
 RUN apt-get install -y --no-install-recommends \
