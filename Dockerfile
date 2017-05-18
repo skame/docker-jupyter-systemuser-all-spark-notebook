@@ -26,7 +26,6 @@ RUN pip --no-cache-dir install --upgrade \
 	tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
 # Install Chainer (without GPU)
 RUN pip install --install-option="--cupy-no-cuda" chainer
-RUN pip install chainer
 # Mecab
 RUN apt-get install -y --no-install-recommends \
 	mecab libmecab-dev mecab-ipadic-utf8
