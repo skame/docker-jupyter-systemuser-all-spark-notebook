@@ -53,7 +53,7 @@ RUN pip install pyhive
 RUN pip install plotly
 RUN pip install cufflinks
 # spark2
-ENV APACHE_SPARK_VERSION 2.0.0
+ENV APACHE_SPARK_VERSION 2.1.1
 RUN cd /tmp && \
         wget -q http://d3kbcqa49mib13.cloudfront.net/spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz && \
         tar xzf spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz -C /usr/local && \
