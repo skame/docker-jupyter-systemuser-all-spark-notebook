@@ -11,7 +11,7 @@ RUN sed -ri 's!/usr/local!/opt/conda/bin:/usr/local!' /etc/sudoers
 ADD https://raw.githubusercontent.com/jupyterhub/dockerspawner/master/systemuser/systemuser.sh /srv/singleuser/systemuser.sh
 CMD ["sh", "/srv/singleuser/systemuser.sh"]
 
-RUN apt-get update && apt-get upgrade && apt-get install -y \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         supervisor
 RUN conda update --all
 RUN conda install libpng freetype numpy pip scipy
