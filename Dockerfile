@@ -67,7 +67,7 @@ RUN pip install linecache2 && pip install argparse
 # clean
 RUN apt-get -y autoremove && apt-get clean # && rm -rf /var/lib/apt/lists/*
 # fix
-RUN chmod a+r /opt/conda/lib/python3.5/site-packages/prettytable-0.7.2-py3.5.egg-info/PKG-INFO
+##RUN chmod a+r /opt/conda/lib/python3.5/site-packages/prettytable-0.7.2-py3.5.egg-info/PKG-INFO
 # smoke test entrypoint
 RUN USER_ID=65000 USER=systemusertest sh /srv/singleuser/systemuser.sh -h && userdel systemusertest
 
