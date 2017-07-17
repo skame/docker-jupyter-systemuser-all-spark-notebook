@@ -19,7 +19,12 @@ RUN conda install libpng freetype numpy pip scipy
 RUN conda install ipykernel jupyter matplotlib conda-build && \
 	python -m ipykernel.kernelspec
 
+# Install TensorFlow CPU version.
+# ref. https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile
+# ref. https://www.tensorflow.org/install/install_linux
 RUN pip install --upgrade -I setuptools
+RUN pip --no-cache-dir install \
+    https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl
 # Install Chainer (without GPU)
 RUN pip install chainer
 # Mecab
@@ -57,7 +62,8 @@ RUN cd /tmp && \
 RUN cd /usr/local && rm -f spark && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7 spark
 ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.1-src.zip
 # for NT lab
-RUN conda install zc.lockfile linecache2 && pip install argparse
+RUN conda install zc.lockfile
+RUN pip install linecache2 && pip install argparse
 # clean
 RUN apt-get -y autoremove && apt-get clean # && rm -rf /var/lib/apt/lists/*
 # fix
