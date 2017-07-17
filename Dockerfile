@@ -13,6 +13,7 @@ CMD ["sh", "/srv/singleuser/systemuser.sh"]
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         supervisor
+RUN conda create -n py36 python=3.6 -y
 RUN conda update --all
 RUN conda install libpng freetype numpy pip scipy
 RUN conda install ipykernel jupyter matplotlib conda-build && \
