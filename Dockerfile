@@ -18,11 +18,7 @@ RUN conda install libpng freetype numpy pip scipy
 RUN conda install ipykernel jupyter matplotlib conda-build && \
 	python -m ipykernel.kernelspec
 
-# Install TensorFlow CPU version. (ref. https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile)
-# ref. https://www.tensorflow.org/install/install_linux
 RUN pip install --upgrade -I setuptools
-RUN pip --no-cache-dir install \
-    https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.2.1-cp35-cp35m-linux_x86_64.whl
 # Install Chainer (without GPU)
 RUN pip install chainer
 # Mecab
