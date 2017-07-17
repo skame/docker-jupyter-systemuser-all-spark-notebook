@@ -21,7 +21,7 @@ RUN conda install ipykernel jupyter matplotlib conda-build && \
 # Install TensorFlow CPU version. (ref. https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile)
 RUN pip install --upgrade -I setuptools
 RUN pip --no-cache-dir install \
-    http://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.0.0-cp27-none-linux_x86_64.whl
+    http://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.0.0-cp34-none-linux_x86_64.whl
 # Install Chainer (without GPU)
 RUN pip install chainer
 # Mecab
