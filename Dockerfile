@@ -35,7 +35,7 @@ RUN conda install gensim
 # skflow
 RUN pip install git+git://github.com/google/skflow.git
 # Octave
-RUN apt-get install -y --no-install-recommends default-jre-headless octave
+RUN apt-get install -y --no-install-recommends octave
 # Octave kernel
 RUN pip install octave_kernel
 RUN python -m octave_kernel.install
