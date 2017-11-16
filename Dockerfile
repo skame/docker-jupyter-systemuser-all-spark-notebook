@@ -3,13 +3,13 @@ FROM jupyter/all-spark-notebook
 USER root
 
 # fetch juptyerhub-singleuser entrypoint
-ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/scripts/jupyterhub-singleuser /usr/local/bin/jupyterhub-singleuser
-RUN chmod 755 /usr/local/bin/jupyterhub-singleuser
+#ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/scripts/jupyterhub-singleuser /usr/local/bin/jupyterhub-singleuser
+#RUN chmod 755 /usr/local/bin/jupyterhub-singleuser
 
-RUN sed -ri 's!/usr/local!/opt/conda/bin:/usr/local!' /etc/sudoers
+#RUN sed -ri 's!/usr/local!/opt/conda/bin:/usr/local!' /etc/sudoers
 
-ADD https://raw.githubusercontent.com/jupyterhub/dockerspawner/master/systemuser/systemuser.sh /srv/singleuser/systemuser.sh
-CMD ["sh", "/srv/singleuser/systemuser.sh"]
+#ADD https://raw.githubusercontent.com/jupyterhub/dockerspawner/master/systemuser/systemuser.sh /srv/singleuser/systemuser.sh
+#CMD ["sh", "/srv/singleuser/systemuser.sh"]
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         supervisor
@@ -66,5 +66,6 @@ RUN pip install linecache2 && pip install argparse
 # clean
 RUN apt-get -y autoremove && apt-get clean # && rm -rf /var/lib/apt/lists/*
 # smoke test entrypoint
-RUN USER_ID=65000 USER=systemusertest sh /srv/singleuser/systemuser.sh -h && userdel systemusertest
+#RUN USER_ID=65000 USER=systemusertest sh /srv/singleuser/systemuser.sh -h && userdel systemusertest
 
+RUN sed -ri 's!/usr/local!/opt/conda/bin:/usr/local!' /etc/sudoers
