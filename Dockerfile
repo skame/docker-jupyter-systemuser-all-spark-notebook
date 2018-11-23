@@ -1,4 +1,4 @@
-FROM jupyter/all-spark-notebook
+FROM jupyter/all-spark-notebook:latest
 
 USER root
 
@@ -17,28 +17,25 @@ RUN conda update --all
 RUN conda install libpng freetype numpy pip scipy
 RUN conda install ipykernel jupyter matplotlib conda-build && \
 	python -m ipykernel.kernelspec
+RUN conda install tensorflow chainer
 
-# Install TensorFlow CPU version.
-# ref. https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile
-# ref. https://www.tensorflow.org/install/install_linux
-RUN pip install --upgrade -I setuptools
-RUN pip --no-cache-dir install \
-    https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl
-# Install Chainer (without GPU)
-RUN pip install chainer
+#RUN pip install --upgrade -I setuptools
 # Mecab
+RUN conda install swig
 RUN apt-get install -y --no-install-recommends \
 	mecab libmecab-dev mecab-ipadic-utf8
-RUN conda skeleton pypi mecab-python3 && conda build mecab-python3
+RUN conda skeleton pypi mecab-python3 
+RUN sed -ri 's/mecab:/mecab/' mecab-python3/meta.yaml
+RUN conda build mecab-python3
 # gensim
 RUN conda install gensim
 # skflow
 RUN pip install git+git://github.com/google/skflow.git
 # Octave
-RUN apt-get install -y --no-install-recommends octave
+#RUN apt-get install -y --no-install-recommends octave
 # Octave kernel
-RUN pip install octave_kernel
-RUN python -m octave_kernel.install
+#RUN pip install octave_kernel
+#RUN python -m octave_kernel.install
 # pyquery
 RUN conda install libxml2 libxslt lxml gcc
 RUN pip install pyquery
