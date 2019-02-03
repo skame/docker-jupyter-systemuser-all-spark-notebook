@@ -2,15 +2,6 @@ FROM jupyter/all-spark-notebook:latest
 
 USER root
 
-# fetch juptyerhub-singleuser entrypoint
-#ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/scripts/jupyterhub-singleuser /usr/local/bin/jupyterhub-singleuser
-#RUN chmod 755 /usr/local/bin/jupyterhub-singleuser
-
-#RUN sed -ri 's!/usr/local!/opt/conda/bin:/usr/local!' /etc/sudoers
-
-#ADD https://raw.githubusercontent.com/jupyterhub/dockerspawner/master/systemuser/systemuser.sh /srv/singleuser/systemuser.sh
-#CMD ["sh", "/srv/singleuser/systemuser.sh"]
-
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
         supervisor
 RUN conda update --all
@@ -37,26 +28,28 @@ RUN pip install git+git://github.com/google/skflow.git
 #RUN pip install octave_kernel
 #RUN python -m octave_kernel.install
 # pyquery
-RUN conda install libxml2 libxslt lxml gcc
-RUN pip install pyquery
+#RUN conda install libxml2 libxslt lxml gcc
+#RUN pip install pyquery
+RUN conda install pyquery
 #RUN conda skeleton pypi pyquery && conda build pyquery
 # SQL
 RUN conda install pymysql
 RUN conda install psycopg2
 RUN conda install ipython-sql
 # pyhive
-RUN pip install pyhive
+RUN conda install pyhive
 # plotly
-RUN pip install plotly
+RUN conda install plotly
+#RUN conda skeleton pypi cufflinks && conda build cufflinks
 RUN pip install cufflinks
 # spark2
-#ENV APACHE_SPARK_VERSION 2.1.1
-#RUN cd /tmp && \
-#        wget -q http://d3kbcqa49mib13.cloudfront.net/spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz && \
-#        tar xzf spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz -C /usr/local && \
-#        rm spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz
-#RUN cd /usr/local && rm -f spark && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7 spark
-#ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.1-src.zip
+ENV APACHE_SPARK_VERSION 2.4.0
+RUN cd /tmp && \
+        wget -q http://ftp.jaist.ac.jp/pub/apache/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz && \
+        tar xzf spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz -C /usr/local && \
+        rm spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz
+RUN cd /usr/local && rm -f spark && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7 spark
+ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.1-src.zip
 # for NT lab
 RUN conda install zc.lockfile
 RUN pip install linecache2 && pip install argparse
