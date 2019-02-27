@@ -49,9 +49,16 @@ RUN cd /tmp && \
         tar xzf spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz -C /usr/local && \
         rm spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz
 RUN cd /usr/local && rm -f spark && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7 spark
-# sparkmagic
-RUN pip install sparkmagic && jupyter nbextension enable --py --sys-prefix widgetsnbextension
 ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip
+# sparkmagic
+RUN pip install sparkmagic && jupyter nbextension enable --py --sys-prefix widgetsnbextension && cd /opt/conda/lib/python3.6/site-packages && \
+	jupyter-kernelspec install sparkmagic/kernels/pyspark3kernel && \
+        jupyter-kernelspec install sparkmagic/kernels/sparkkernel && \
+        jupyter-kernelspec install sparkmagic/kernels/sparkrkernel
+RUN mkdir /opt/sparkmagic
+COPY config.json /opt/sparkmagic/config.json
+ENV SPARKMAGIC_CONF_DIR /opt/sparkmagic
+ENV SPARKMAGIC_CONF_FILE config.json
 # for NT lab
 RUN conda install zc.lockfile
 RUN pip install linecache2 && pip install argparse
