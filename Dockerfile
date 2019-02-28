@@ -15,9 +15,10 @@ RUN conda install tensorflow chainer
 RUN conda install swig
 RUN apt-get install -y --no-install-recommends \
 	mecab libmecab-dev mecab-ipadic-utf8
-RUN conda skeleton pypi mecab-python3 
-RUN sed -ri 's/mecab:/mecab/' mecab-python3/meta.yaml
-RUN conda build mecab-python3
+#RUN chown -R root /home/jovyan/.cache
+RUN apt-get install -y gcc-multilib g++-multilib
+RUN conda skeleton pypi mecab-python3 && sed -ri 's/mecab:/mecab/' mecab-python3/meta.yaml && \
+	conda build mecab-python3
 # gensim
 RUN conda install gensim
 # skflow
