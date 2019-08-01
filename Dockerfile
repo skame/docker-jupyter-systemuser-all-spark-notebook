@@ -17,8 +17,9 @@ RUN apt-get install -y --no-install-recommends \
 	mecab libmecab-dev mecab-ipadic-utf8
 #RUN chown -R root /home/jovyan/.cache
 RUN apt-get install -y gcc-multilib g++-multilib
-RUN conda skeleton pypi mecab-python3 && sed -ri 's/mecab:/mecab/' mecab-python3/meta.yaml && \
-	conda build mecab-python3
+#RUN conda skeleton pypi mecab-python3 && sed -ri 's/mecab:/mecab/' mecab-python3/meta.yaml && \
+#	conda build mecab-python3
+RUN pip install mecab-python3
 # gensim
 RUN conda install gensim
 # skflow
@@ -44,7 +45,7 @@ RUN conda install plotly
 #RUN conda skeleton pypi cufflinks && conda build cufflinks
 RUN pip install cufflinks
 # spark2
-ENV APACHE_SPARK_VERSION 2.4.0
+ENV APACHE_SPARK_VERSION 2.4.3
 RUN cd /tmp && \
         wget -q http://ftp.jaist.ac.jp/pub/apache/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz && \
         tar xzf spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz -C /usr/local && \
@@ -52,8 +53,12 @@ RUN cd /tmp && \
 RUN cd /usr/local && rm -f spark && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7 spark
 ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip
 # sparkmagic
-RUN pip install sparkmagic && jupyter nbextension enable --py --sys-prefix widgetsnbextension && cd /opt/conda/lib/python3.6/site-packages && \
-	jupyter-kernelspec install sparkmagic/kernels/pyspark3kernel && \
+RUN pip install sparkmagic && jupyter nbextension enable --py --sys-prefix widgetsnbextension
+#COPY 507.mod.diff /tmp
+#RUN cd /opt/conda/lib/python3.7/site-packages/sparkmagic && patch -t -p3 < /tmp/507.mod.diff
+RUN cd /opt/conda/lib/python3.7/site-packages && \
+#	jupyter-kernelspec install sparkmagic/kernels/pyspark3kernel && \
+	jupyter-kernelspec install sparkmagic/kernels/pysparkkernel && \
         jupyter-kernelspec install sparkmagic/kernels/sparkkernel && \
         jupyter-kernelspec install sparkmagic/kernels/sparkrkernel
 RUN mkdir /opt/sparkmagic

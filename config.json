@@ -2,20 +2,20 @@
   "kernel_python_credentials" : {
     "username": "",
     "password": "",
-    "url": "http://note03.***REMOVED***:8999",
+    "url": "http://hdpm02.***REMOVED***:8999",
     "auth": "None"
   },
 
   "kernel_scala_credentials" : {
     "username": "",
     "password": "",
-    "url": "http://note03.***REMOVED***:8999",
+    "url": "http://hdpm02.***REMOVED***:8999",
     "auth": "None"
   },
   "kernel_r_credentials": {
     "username": "",
     "password": "",
-    "url": "http://note03.***REMOVED***:8999"
+    "url": "http://hdpm02.***REMOVED***:8999"
   },
 
   "logging_config": {
