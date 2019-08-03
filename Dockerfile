@@ -41,7 +41,7 @@ RUN conda install ipython-sql
 # pyhive
 RUN conda install pyhive
 # plotly
-RUN conda install plotly
+RUN conda install plotly dash dash-renderer dash-html-components dash-core-components
 #RUN conda skeleton pypi cufflinks && conda build cufflinks
 RUN pip install cufflinks
 # spark2
@@ -52,6 +52,7 @@ RUN cd /tmp && \
         rm spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz
 RUN cd /usr/local && rm -f spark && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7 spark
 ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip
+ENV PYSPARK_PYTHON /opt/conda/bin/python
 # sparkmagic
 RUN pip install sparkmagic && jupyter nbextension enable --py --sys-prefix widgetsnbextension
 #COPY 507.mod.diff /tmp
