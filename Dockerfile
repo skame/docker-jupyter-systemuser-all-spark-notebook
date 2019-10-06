@@ -45,7 +45,7 @@ RUN conda install plotly dash dash-renderer dash-html-components dash-core-compo
 #RUN conda skeleton pypi cufflinks && conda build cufflinks
 RUN pip install cufflinks
 # spark2
-ENV APACHE_SPARK_VERSION 2.4.3
+ENV APACHE_SPARK_VERSION 2.4.4
 RUN cd /tmp && \
         wget -q http://ftp.jaist.ac.jp/pub/apache/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz && \
         tar xzf spark-${APACHE_SPARK_VERSION}-bin-hadoop2.7.tgz -C /usr/local && \
